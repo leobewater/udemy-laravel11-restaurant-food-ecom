@@ -21,8 +21,12 @@ class SliderDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-        return (new EloquentDataTable($query))
-            ->addColumn('action', 'slider.action')
+        return(new EloquentDataTable($query))
+            ->addColumn('action', function ($query) {
+                $edit = "<a href='" . route('admin.slider.edit', $query->id) . "' class='btn'><i class='fas fa-edit'></i></a>";
+                $delete = "<a href='" . route('admin.slider.destroy', $query->id) . "' class='btn'><i class='far fa-trash-alt'></i></a>";
+                return $edit . $delete;
+            })
             ->setRowId('id');
     }
 
@@ -70,7 +74,7 @@ class SliderDataTable extends DataTable
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
-                  ->width(60)
+                  ->width(120)
                   ->addClass('text-center'),
         ];
     }
