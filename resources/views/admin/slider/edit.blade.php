@@ -10,9 +10,9 @@
                 <h4>Card Header</h4>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.slider.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.slider.update', $slider) }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    @method('POST')
+                    @method('PUT')
                     <div class="form-group">
                         <label>Image</label>
                         <div id="image-preview" class="image-preview">

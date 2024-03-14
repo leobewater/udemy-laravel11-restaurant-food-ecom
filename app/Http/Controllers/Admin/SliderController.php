@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\SliderDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\SliderCreateRequest;
+use App\Http\Requests\Admin\SliderUpdateRequest;
 use App\Models\Slider;
 use App\Traits\FileUploadTrait;
 use Illuminate\Http\Request;
@@ -68,14 +69,15 @@ class SliderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(SliderCreateRequest $request, Slider $slider)
+    public function update(SliderUpdateRequest $request, Slider $slider)
     {
         $validatedData = $request->validated();
-        if($request['image']) {
-            $validatedData['image'] = $this->uploadImage($request, 'image');
+
+        if(!empty($validatedData['image'])) {
+            $validatedData['image'] = $this->uploadImage($request, 'image', $slider->image);
         }
 
-        $slider->save($validatedData);
+        $slider->update($validatedData);
 
         return redirect(route('admin.slider.index'))->with([
             'status' => 'slider-updated',
