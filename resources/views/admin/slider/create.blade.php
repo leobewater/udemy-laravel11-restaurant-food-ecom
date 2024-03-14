@@ -42,12 +42,12 @@
                     </div>
                     <div class="form-group">
                         <label>Status</label>
-                        <select name="status" class="form-control" value="{{ old('status') }}">
-                            <option value="1">Enable</option>
-                            <option value="0">Disable</option>
+                        <select name="status" class="form-control">
+                            <option @selected(old('status') === 1) value="1">Active</option>
+                            <option @selected(old('status') !== 1) value="0">Inactive</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary" @disabled($errors->isNotEmpty())>Create</button>
                 </form>
             </div>
         </div>
