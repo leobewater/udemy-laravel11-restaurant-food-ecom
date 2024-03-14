@@ -8,12 +8,7 @@ Video: https://www.udemy.com/course/build-complete-laravel-restaurant-and-food-o
 > php artisan ide-helper:models
 > php artisan ide-helper:meta
 
-## laravel toastr
-## https://github.com/yoeunes/toastr?tab=readme-ov-file
-> composer require yoeunes/toastr
+## laravel toast
+## https://dev.to/anik2069/simple-and-easiest-toast-notifications-in-laravel-a-quick-guide-2dj6
 
-## download https://github.com/CodeSeven/toastr
-## then copy the following files to public/frontend/ folder
-## build/toastr.min.js
-## build/toastr.css
 ```
