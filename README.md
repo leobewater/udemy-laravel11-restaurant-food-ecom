@@ -13,4 +13,8 @@ Source Code: https://github.com/websolutionus/udemy_restaurant_foodpark/tree/mai
 ## laravel toast
 ## https://dev.to/anik2069/simple-and-easiest-toast-notifications-in-laravel-a-quick-guide-2dj6
 
+
+## https://github.com/yajra/laravel-datatables
+> composer require yajra/laravel-datatables-oracle:"^11"
+
 ```
