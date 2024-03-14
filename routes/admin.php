@@ -5,16 +5,15 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(
-    [
-    'prefix' => 'admin',
-    // 'middleware' => ['auth', 'role:admin'],
-    'as' => 'admin'
-    ],
+    ['prefix' => 'admin', 'as' => 'admin.'],
     function () {
         // Auth Routes
-        Route::get('/login', [AdminAuthController::class,'index'])->name('admin.login');
+        Route::get('/login', [AdminAuthController::class,'index'])->name('login');
 
-        Route::get('/dashboard', [AdminDashboardController::class,'index'])
-            ->name('dashboard');
+        // Admin Only Routes
+        Route::middleware(['auth', 'role:admin'])->group(function () {
+            Route::get('/dashboard', [AdminDashboardController::class, 'index'])
+                ->name('dashboard');
+        });
     }
 );
