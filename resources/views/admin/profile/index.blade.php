@@ -11,7 +11,7 @@
                     <h4>Update User Settings</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.profile.update') }}" method="POST">
+                    <form action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -19,7 +19,7 @@
                             <label>Avatar</label>
                             <div id="image-preview" class="image-preview">
                                 <label for="image-upload" id="image-label">Choose File</label>
-                                <input type="file" name="image" id="image-upload" />
+                                <input type="file" name="avatar" id="image-upload" />
                             </div>
                         </div>
 
@@ -63,3 +63,16 @@
         </div>
     </section>
 @endsection
+
+@push('scripts')
+    <script>
+        // show avatar when loads
+        $(document).ready(function() {
+            $('.image-preview').css({
+                'background-image': 'url({{ asset(auth()->user()->avatar) }})',
+                'background-size' : 'cover',
+                'background-position' : 'center center'
+            });
+        });
+    </script>
+@endpush
