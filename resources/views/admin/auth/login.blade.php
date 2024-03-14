@@ -48,7 +48,7 @@
                                             <label for="password">Password</label>
                                             @if (Route::has('password.request'))
                                                 <div class="float-right">
-                                                    <a href="{{ route('password.request') }}" class="text-small">
+                                                    <a href="{{ route('admin.forget-password') }}" class="text-small">
                                                         Forgot Password?
                                                     </a>
                                                 </div>

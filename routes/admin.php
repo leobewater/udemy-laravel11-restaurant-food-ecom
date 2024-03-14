@@ -12,6 +12,7 @@ Route::group(
         Route::middleware(['guest'])->group(function () {
             // Auth Routes
             Route::get('/login', [AdminAuthController::class,'index'])->name('login');
+            Route::get('admin/forget-password', [AdminAuthController::class, 'forgetPassword'])->name('forget-password');
         });
 
         // Admin Only Routes
