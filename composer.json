@@ -8,8 +8,7 @@
         "php": "^8.2",
         "laravel/breeze": "^2.0",
         "laravel/framework": "^11.0",
-        "laravel/tinker": "^2.9",
-        "yoeunes/toastr": "*"
+        "laravel/tinker": "^2.9"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.0",
