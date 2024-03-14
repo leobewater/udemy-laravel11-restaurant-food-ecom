@@ -18,11 +18,13 @@
                         <div class="fp__dashboard_menu">
                             <div class="dasboard_header">
                                 <div class="dasboard_header_img">
-                                    <img src="images/comment_img_2.png" alt="user" class="img-fluid w-100">
+                                    <img src="{{ auth()->user()->avatar }}" alt="user" class="img-fluid w-100">
                                     <label for="upload"><i class="far fa-camera"></i></label>
-                                    <input type="file" id="upload" hidden>
+                                    <form id="avatar_form" action="{{ route('profile.avatar.update') }}" method="POST" enctype="multipart/form-data">
+                                        <input type="file" id="upload" hidden name="avatar" />
+                                    </form>
                                 </div>
-                                <h2>hasib ahmed</h2>
+                                <h2>{{ auth()->user()->name }}</h2>
                             </div>
                             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
                                 aria-orientation="vertical">
@@ -114,13 +116,15 @@
                                                         <div class="col-12">
                                                             <div class="fp__comment_imput_single">
                                                                 <label>name</label>
-                                                                <input type="text" name="name" placeholder="Name" value="{{ auth()->user()->name }}" />
+                                                                <input type="text" name="name" placeholder="Name"
+                                                                    value="{{ auth()->user()->name }}" />
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
                                                             <div class="fp__comment_imput_single">
                                                                 <label>email</label>
-                                                                <input type="email" name="email" placeholder="Email" value="{{ auth()->user()->email }}" />
+                                                                <input type="email" name="email" placeholder="Email"
+                                                                    value="{{ auth()->user()->email }}" />
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
@@ -1213,3 +1217,32 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        // upload avatar
+        $(document).ready(function() {
+            $('#avatar_form #upload').on('change', function() {
+                let form = this.closest('form#avatar_form');
+                let formData = new FormData(form);
+
+                $.ajax({
+                    method: "POST",
+                    url: "{{ route('profile.avatar.update') }}",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            window.location.reload();
+                        }
+                    },
+                    error: function(error) {
+                        console.error(error);
+                        toastr.error(error);
+                    }
+                })
+            });
+        });
+    </script>
+@endpush
