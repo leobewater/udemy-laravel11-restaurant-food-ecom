@@ -89,7 +89,7 @@
                                     <div class="col-xl-12">
                                         <div class="fp__login_imput fp__login_check_area">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
+                                                <input class="form-check-input" type="checkbox"
                                                     id="remember_me" name="remember">
                                                 <label class="form-check-label" for="remember_me">
                                                     Remember Me
