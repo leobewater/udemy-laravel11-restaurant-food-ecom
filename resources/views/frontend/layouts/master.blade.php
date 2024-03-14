@@ -80,5 +80,12 @@
     <script src="{{ asset('frontend/js/jquery.exzoom.js') }}"></script>
     <script src="{{ asset('frontend/js/toastr.min.js') }}"></script>
     <script src="{{ asset('frontend/js/main.js') }}"></script>
+    <script>
+        @if($errors->any())
+            @foreach($errors->all() as $error)
+                toastr.error("{{ $error }}");
+            @endforeach
+        @endif
+    </script>
 </body>
 </html>
