@@ -1,5 +1,7 @@
 Video: https://www.udemy.com/course/build-complete-laravel-restaurant-and-food-ordering-ecommerce-system/learn/lecture/
 
+Source Code: https://github.com/websolutionus/udemy_restaurant_foodpark/tree/main
+
 ```bash
 > laravel with Breeze + Blade
 
