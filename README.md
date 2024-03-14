@@ -13,7 +13,7 @@ Video: https://www.udemy.com/course/build-complete-laravel-restaurant-and-food-o
 > composer require yoeunes/toastr
 
 ## download https://github.com/CodeSeven/toastr
-## and copy the following files to public/frontend/ folder
+## then copy the following files to public/frontend/ folder
 ## build/toastr.min.js
 ## build/toastr.css
 ```

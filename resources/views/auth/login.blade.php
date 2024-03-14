@@ -78,15 +78,15 @@
                                     <div class="col-xl-12">
                                         <div class="fp__login_imput">
                                             <label for="email">email</label>
-                                            <input type="email" name="email" placeholder="Email" :value="old('email')" autofocus>
-                                            {{-- <x-input-error :messages="$errors->get('email')" class="mt-2" /> --}}
+                                            <input type="email" name="email" placeholder="Email" :value="old('email')" required autofocus>
+                                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                         </div>
                                     </div>
                                     <div class="col-xl-12">
                                         <div class="fp__login_imput">
                                             <label for="password">password</label>
                                             <input type="password" name="password" placeholder="Password">
-                                            {{-- <x-input-error :messages="$errors->get('password')" class="mt-2" /> --}}
+                                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                         </div>
                                     </div>
 
