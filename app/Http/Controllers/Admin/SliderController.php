@@ -91,6 +91,20 @@ class SliderController extends Controller
      */
     public function destroy(Slider $slider)
     {
-        //
+        try {
+            $slider->delete();
+
+            return response([
+                'status' => 'success',
+                'message' => 'Slide deleted successfully',
+                'alert-type' => 'success'
+            ]);
+        } catch (\Exception $e) {
+            return response([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+                'alert-type' => 'error'
+            ]);
+        }
     }
 }
