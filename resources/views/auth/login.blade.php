@@ -53,10 +53,6 @@
             <div class="container">
                 <div class="fp__breadcrumb_text">
                     <h1>sign in</h1>
-                    <ul>
-                        <li><a href="index.html">home</a></li>
-                        <li><a href="#">sign in</a></li>
-                    </ul>
                 </div>
             </div>
         </div>
