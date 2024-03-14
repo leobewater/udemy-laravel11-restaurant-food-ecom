@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
 
             $table->text('image');
-            $table->string('offer');
+            $table->string('offer')->nullable();
             $table->string('title');
             $table->string('sub_title');
             $table->string('short_description');
-            $table->string('button_link');
-            $table->boolean('status');
+            $table->string('button_link')->nullable();
+            $table->boolean('status')->default(1);
 
             $table->timestamps();
         });
