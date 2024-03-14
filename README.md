@@ -17,6 +17,7 @@ Source Code: https://github.com/websolutionus/udemy_restaurant_foodpark/tree/mai
 
 ## https://github.com/yajra/laravel-datatables
 ## https://datatables.net/
+> composer require yajra/laravel-datatables-buttons
 > composer require yajra/laravel-datatables-oracle:"^11"
 > php artisan datatables:make Slider (not working)
 ```
