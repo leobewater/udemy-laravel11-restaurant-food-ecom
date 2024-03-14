@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/venobox.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/jquery.exzoom.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('frontend/css/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
     <!-- <link rel="stylesheet" href="css/rtl.css"> -->
@@ -62,7 +62,7 @@
         go to top
     </div>
     <!--=============================
-        SCROLL BUTTON END 
+        SCROLL BUTTON END
     ==============================-->
 
     <script src="{{ asset('frontend/js/jquery-3.6.0.min.js') }}"></script>
@@ -78,6 +78,7 @@
     <script src="{{ asset('frontend/js/sticky_sidebar.js') }}"></script>
     <script src="{{ asset('frontend/js/wow.min.js') }}"></script>
     <script src="{{ asset('frontend/js/jquery.exzoom.js') }}"></script>
+    <script src="{{ asset('frontend/js/toastr.min.js') }}"></script>
     <script src="{{ asset('frontend/js/main.js') }}"></script>
 </body>
 </html>
