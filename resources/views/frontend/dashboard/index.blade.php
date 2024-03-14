@@ -102,8 +102,8 @@
                                             </h4>
 
                                             <div class="personal_info_text">
-                                                <p><span>Name:</span> Hasib Ahmed</p>
-                                                <p><span>Email:</span> hasibahmed@gmail.com</p>
+                                                <p><span>Name:</span> {{ auth()->user()->name }}</p>
+                                                <p><span>Email:</span> {{ auth()->user()->email }}</p>
                                             </div>
 
                                             <div class="fp_dash_personal_info_edit comment_input p-0">
@@ -114,13 +114,13 @@
                                                         <div class="col-12">
                                                             <div class="fp__comment_imput_single">
                                                                 <label>name</label>
-                                                                <input type="text" name="name" placeholder="Name">
+                                                                <input type="text" name="name" placeholder="Name" value="{{ auth()->user()->name }}" />
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
                                                             <div class="fp__comment_imput_single">
                                                                 <label>email</label>
-                                                                <input type="email" name="email" placeholder="Email">
+                                                                <input type="email" name="email" placeholder="Email" value="{{ auth()->user()->email }}" />
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
