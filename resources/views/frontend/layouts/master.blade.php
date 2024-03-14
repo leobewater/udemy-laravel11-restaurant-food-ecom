@@ -14,10 +14,11 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/venobox.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/jquery.exzoom.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/css/toastr.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('frontend/css/toastr.min.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
     <!-- <link rel="stylesheet" href="css/rtl.css"> -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet">
 </head>
 
 <body>
@@ -78,9 +79,11 @@
     <script src="{{ asset('frontend/js/sticky_sidebar.js') }}"></script>
     <script src="{{ asset('frontend/js/wow.min.js') }}"></script>
     <script src="{{ asset('frontend/js/jquery.exzoom.js') }}"></script>
-    <script src="{{ asset('frontend/js/toastr.min.js') }}"></script>
+    {{-- <script src="{{ asset('frontend/js/toastr.min.js') }}"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="{{ asset('frontend/js/main.js') }}"></script>
     <script>
+        // https://dev.to/anik2069/simple-and-easiest-toast-notifications-in-laravel-a-quick-guide-2dj6
         toastr.options.progressBar = true;
 
         @if($errors->any())
@@ -88,6 +91,30 @@
                 toastr.error("{{ $error }}");
             @endforeach
         @endif
+
+        @if (Session::has('message'))
+            var type = "{{ Session::get('alert-type', 'info') }}"
+            switch (type) {
+                case 'info':
+                    // toastr.options.timeOut = 10000;
+                    toastr.info("{{ Session::get('message') }}");
+                    break;
+                case 'success':
+
+                    // toastr.options.timeOut = 10000;
+                    toastr.success("{{ Session::get('message') }}");
+                    break;
+                case 'warning':
+                    // toastr.options.timeOut = 10000;
+                    toastr.warning("{{ Session::get('message') }}");
+                    break;
+                case 'error':
+                    // toastr.options.timeOut = 10000;
+                    toastr.error("{{ Session::get('message') }}");
+                    break;
+            }
+        @endif
+
     </script>
 </body>
 </html>
