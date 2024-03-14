@@ -14,6 +14,15 @@
                     <form action="{{ route('admin.profile.update') }}" method="POST">
                         @csrf
                         @method('PUT')
+
+                        <div class="form-group">
+                            <label>Avatar</label>
+                            <div id="image-preview" class="image-preview">
+                                <label for="image-upload" id="image-label">Choose File</label>
+                                <input type="file" name="image" id="image-upload" />
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label>Name</label>
                             <input type="text" class="form-control" name="name" value="{{ auth()->user()->name }}" />
