@@ -96,10 +96,14 @@
                                                 <input class="form-check-input" type="checkbox" value=""
                                                     id="remember_me" name="remember">
                                                 <label class="form-check-label" for="remember_me">
-                                                    Remeber Me
+                                                    Remember Me
                                                 </label>
                                             </div>
-                                            <a href="forgot_password.html">Forgot Password ?</a>
+                                            @if (Route::has('password.request'))
+                                            <a href="{{ route('password.request') }}">
+                                                {{ __('Forgot your password?') }}
+                                            </a>
+                                            @endif
                                         </div>
                                     </div>
 
@@ -110,7 +114,6 @@
                                     </div>
                                 </div>
                             </form>
-                            <p class="or"><span>or</span></p>
                             <p class="create_account">Dont’t have an aceount ? <a href="{{ route('register') }}">Create Account</a>
                             </p>
                         </div>
