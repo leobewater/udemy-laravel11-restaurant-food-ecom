@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\ProfilePasswordUpdateRequest;
 use App\Http\Requests\Admin\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class ProfileController extends Controller
 {
@@ -25,9 +27,27 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return redirect()->back()->with([
+        return back()->with([
             'status' => 'profile-updated',
             'message' => "Profile updated successfully",
+            'alert-type' => 'success'
+        ]);
+    }
+
+    public function updatePassword(ProfilePasswordUpdateRequest $request): RedirectResponse
+    {
+        // $validated = $request->validateWithBag('updatePassword', [
+        //     'current_password' => ['required', 'current_password'],
+        //     'password' => ['required', Password::defaults(), 'confirmed'],
+        // ]);
+
+        $request->user()->update([
+            'password' => Hash::make($request->validated()['password']),// => $validated['password']),
+        ]);
+
+        return back()->with([
+            'status' => 'password-updated',
+            'message' => "Profile password updated successfully",
             'alert-type' => 'success'
         ]);
     }
