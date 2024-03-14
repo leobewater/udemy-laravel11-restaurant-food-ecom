@@ -54,8 +54,8 @@ class ProfileController extends Controller
     public function updateAvatar(Request $request): Response
     {
         // Image upload
-        $imagePath = $this->uploadImage($request, 'avatar');
-        if ($imagePath) {
+        $imagePath = $this->uploadImage($request, 'avatar', auth()->user()->avatar);
+        if (!empty($imagePath)) {
             $user = auth()->user();
             $user->avatar = $imagePath;
             $user->save();

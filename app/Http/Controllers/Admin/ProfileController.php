@@ -23,8 +23,8 @@ class ProfileController extends Controller
     public function updateProfile(ProfileUpdateRequest $request): RedirectResponse
     {
         $validatedData = $request->validated();
-        if ($request['avatar']) {
-            $validatedData['avatar'] = $this->uploadImage($request, 'avatar');
+        if (!empty($request['avatar'])) {
+            $validatedData['avatar'] = $this->uploadImage($request, 'avatar', $request->user()->avatar);
         }
 
         $request->user()->fill($validatedData);
