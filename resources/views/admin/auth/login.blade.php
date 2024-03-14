@@ -4,18 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Login &mdash; Stisla</title>
+    <title>Admin Login</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ asset('admin/assets/modules/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/modules/fontawesome/css/all.min.css') }}">
 
-    <!-- CSS Libraries -->
-    <link rel="stylesheet" href="{{ asset('admin/assets/modules/bootstrap-social/bootstrap-social.css') }}">
-
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('admin/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/css/components.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet">
 </head>
 
 <body>
@@ -32,73 +30,49 @@
 
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h4>Login</h4>
+                                <h4>Admin Login</h4>
                             </div>
 
                             <div class="card-body">
-                                <form method="POST" action="#" class="needs-validation" novalidate="">
+                                <form method="POST" action="{{ route('login') }}">
+                                    @csrf
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input id="email" type="email" class="form-control" name="email"
-                                            tabindex="1" required autofocus>
-                                        <div class="invalid-feedback">
-                                            Please fill in your email
-                                        </div>
+                                        <input type="email" name="email" class="form-control" :value="old('email')"
+                                            required autofocus>
+                                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                     </div>
 
                                     <div class="form-group">
                                         <div class="d-block">
-                                            <label for="password" class="control-label">Password</label>
-                                            <div class="float-right">
-                                                <a href="auth-forgot-password.html" class="text-small">
-                                                    Forgot Password?
-                                                </a>
-                                            </div>
+                                            <label for="password">Password</label>
+                                            @if (Route::has('password.request'))
+                                                <div class="float-right">
+                                                    <a href="{{ route('password.request') }}" class="text-small">
+                                                        Forgot Password?
+                                                    </a>
+                                                </div>
+                                            @endif
                                         </div>
-                                        <input id="password" type="password" class="form-control" name="password"
-                                            tabindex="2" required>
-                                        <div class="invalid-feedback">
-                                            please fill in your password
-                                        </div>
+                                        <input type="password" name="password" class="form-control">
+                                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                     </div>
 
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" name="remember" class="custom-control-input"
-                                                tabindex="3" id="remember-me">
-                                            <label class="custom-control-label" for="remember-me">Remember Me</label>
+                                                id="remember_me">
+                                            <label class="custom-control-label" for="remember_me">Remember Me</label>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                                        <button type="submit" class="btn btn-primary btn-lg btn-block">
                                             Login
                                         </button>
                                     </div>
                                 </form>
-                                <div class="text-center mt-4 mb-3">
-                                    <div class="text-job text-muted">Login With Social</div>
-                                </div>
-                                <div class="row sm-gutters">
-                                    <div class="col-6">
-                                        <a class="btn btn-block btn-social btn-facebook">
-                                            <span class="fab fa-facebook"></span> Facebook
-                                        </a>
-                                    </div>
-                                    <div class="col-6">
-                                        <a class="btn btn-block btn-social btn-twitter">
-                                            <span class="fab fa-twitter"></span> Twitter
-                                        </a>
-                                    </div>
-                                </div>
-
                             </div>
-                        </div>
-                        <div class="mt-5 text-muted text-center">
-                            Don't have an account? <a href="auth-register.html">Create One</a>
-                        </div>
-                        <div class="simple-footer">
-                            Copyright &copy; Stisla 2018
                         </div>
                     </div>
                 </div>
@@ -117,6 +91,42 @@
 
     <script src="{{ asset('admin/assets/js/scripts.js') }}"></script>
     <script src="{{ asset('admin/assets/js/custom.js') }}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+        // https://dev.to/anik2069/simple-and-easiest-toast-notifications-in-laravel-a-quick-guide-2dj6
+        toastr.options.progressBar = true;
+
+        @if($errors->any())
+            @foreach($errors->all() as $error)
+                toastr.error("{{ $error }}");
+            @endforeach
+        @endif
+
+        @if (Session::has('message'))
+            var type = "{{ Session::get('alert-type', 'info') }}"
+            switch (type) {
+                case 'info':
+                    // toastr.options.timeOut = 10000;
+                    toastr.info("{{ Session::get('message') }}");
+                    break;
+                case 'success':
+
+                    // toastr.options.timeOut = 10000;
+                    toastr.success("{{ Session::get('message') }}");
+                    break;
+                case 'warning':
+                    // toastr.options.timeOut = 10000;
+                    toastr.warning("{{ Session::get('message') }}");
+                    break;
+                case 'error':
+                    // toastr.options.timeOut = 10000;
+                    toastr.error("{{ Session::get('message') }}");
+                    break;
+            }
+        @endif
+
+    </script>
 </body>
 
 </html>
