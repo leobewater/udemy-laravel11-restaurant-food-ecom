@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProfilePasswordUpdateRequest;
 use App\Http\Requests\Admin\ProfileUpdateRequest;
+use App\Traits\FileUploadTrait;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Hash;
@@ -12,6 +13,8 @@ use Illuminate\Validation\Rules\Password;
 
 class ProfileController extends Controller
 {
+    use FileUploadTrait;
+
     public function index(): View
     {
         return view('admin.profile.index', []);
@@ -19,7 +22,12 @@ class ProfileController extends Controller
 
     public function updateProfile(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $validatedData = $request->validated();
+        if ($request['avatar']) {
+            $validatedData['avatar'] = $this->uploadImage($request, 'avatar');
+        }
+
+        $request->user()->fill($validatedData);
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
