@@ -27,6 +27,7 @@ Route::group(
             Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
 
             Route::resource('/slider', SliderController::class);
+            Route::put('/why-choose-title-update', [WhyChooseUsController::class, 'updateTitle'])->name('why-choose-title.update');
             Route::resource('/why-choose-us', WhyChooseUsController::class);
         });
     }
