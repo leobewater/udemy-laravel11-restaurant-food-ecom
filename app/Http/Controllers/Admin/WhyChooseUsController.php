@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\WhyChooseUsDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\WhyChooseUs;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class WhyChooseUsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(WhyChooseUsDataTable $dataTable): View
     {
-        //
+        return $dataTable->render('admin.why-choose-us.index');
     }
 
     /**

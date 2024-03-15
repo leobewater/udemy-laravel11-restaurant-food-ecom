@@ -13,11 +13,15 @@ Source Code: https://github.com/websolutionus/udemy_restaurant_foodpark/tree/mai
 ## laravel toast
 ## https://dev.to/anik2069/simple-and-easiest-toast-notifications-in-laravel-a-quick-guide-2dj6
 
-> php artisan make:model Slider
 
 ## https://github.com/yajra/laravel-datatables
 ## https://datatables.net/
 > composer require yajra/laravel-datatables-buttons
 > composer require yajra/laravel-datatables-oracle:"^11"
+
+> php artisan make:model Slider
 > php artisan datatables:make Slider
+
+> php artisan make:model WhyChooseUs
+> php artisan datatables:make WhyChooseUs
 ```
