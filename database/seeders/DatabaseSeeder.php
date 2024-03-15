@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\SectionTitle;
 use App\Models\Slider;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\WhyChooseUs;
 use Illuminate\Database\Seeder;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,8 +24,12 @@ class DatabaseSeeder extends Seeder
             Slider::factory(4)->create();
         }
 
+        if (SectionTitle::count() === 0) {
+            $this->call(WhyChooseUsTitleSeeder::class);
+        }
+
         if (WhyChooseUs::count() === 0) {
-            $this->call(WhyChooseUsSeeder::class);
+            WhyChooseUs::factory(3)->create();
         }
     }
 }
