@@ -80,8 +80,14 @@ class ProductDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('name'),
+            Column::make('thumb_image'),
+            Column::make('price'),
+            Column::make('offer_price'),
+            Column::make('status'),
+            Column::make('show_at_home'),
+            // Column::make('created_at'),
+            // Column::make('updated_at'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\SectionTitle;
 use App\Models\Slider;
 use App\Models\User;
@@ -35,6 +36,10 @@ class DatabaseSeeder extends Seeder
 
         if (Category::count() === 0) {
             $this->call(CategorySeeder::class);
+        }
+
+        if (Product::count() === 0) {
+            Product::factory(10)->create();
         }
     }
 }
