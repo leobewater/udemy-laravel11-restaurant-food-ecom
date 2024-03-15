@@ -57,7 +57,7 @@ class WhyChooseUsDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(0, 'desc') // 0 == 'id'
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
