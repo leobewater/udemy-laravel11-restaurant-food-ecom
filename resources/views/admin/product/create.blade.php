@@ -13,14 +13,6 @@
                 <form action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('POST')
-                    {{--
-            'category_id' => function(){
-                return Category::inRandomOrder()->first()->id;
-            },
-            'seo_title' => fake()->sentence(),
-            'seo_description' => fake()->paragraph(),
-            'show_at_home' => fake()->boolean(),
-            'status' => fake()->boolean(), --}}
                     <div class="form-group">
                         <label>Product Thumbnail</label>
                         <div id="image-preview" class="image-preview">
@@ -48,7 +40,7 @@
                     </div>
                     <div class="form-group">
                         <label>Long Description</label>
-                        <textarea name="long_description" class="form-control">{{ old('long_description') }}</textarea>
+                        <textarea name="long_description" class="summernote">{{ old('long_description') }}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Price</label>
@@ -61,6 +53,14 @@
                     <div class="form-group">
                         <label>Sku</label>
                         <input type="text" name="sku" class="form-control" value="{{ old('sku') }}" />
+                    </div>
+                    <div class="form-group">
+                        <label>SEO Title</label>
+                        <input type="text" name="seo_title" class="form-control" value="{{ old('seo_title') }}" />
+                    </div>
+                    <div class="form-group">
+                        <label>SEO Description</label>
+                        <textarea name="seo_description" class="form-control">{{ old('seo_description') }}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Status</label>
