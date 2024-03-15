@@ -23,8 +23,8 @@ class CategoryDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
         ->addColumn('action', function ($query) {
-            $edit = "<a href='" . route('admin.slider.edit', $query->id) . "' class='btn'><i class='fas fa-edit'></i></a>";
-            $delete = "<a href='" . route('admin.slider.destroy', $query->id) . "' class='btn delete-item'><i class='far fa-trash-alt'></i></a>";
+            $edit = "<a href='" . route('admin.category.edit', $query->id) . "' class='btn'><i class='fas fa-edit'></i></a>";
+            $delete = "<a href='" . route('admin.category.destroy', $query->id) . "' class='btn delete-item'><i class='far fa-trash-alt'></i></a>";
             return $edit . $delete;
         })
         ->addColumn('updated_at', function ($query) {
@@ -72,14 +72,14 @@ class CategoryDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
             Column::make('id'),
             Column::make('created_at'),
             Column::make('updated_at'),
+            Column::computed('action')
+            ->exportable(false)
+            ->printable(false)
+            ->width(120)
+            ->addClass('text-center'),
         ];
     }
 
