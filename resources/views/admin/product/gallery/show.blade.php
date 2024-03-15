@@ -7,7 +7,7 @@
 
         <div class="card card-primary">
             <div class="card-header">
-                <h4>All Images</h4>
+                <h4>All Images for "{{ $product->name }}"</h4>
             </div>
             <div class="card-body">
                 <div class="col-md-8">
@@ -22,6 +22,19 @@
                         </div>
                     </form>
                 </div>
+            </div>
+        </div>
+
+        <div class="card card-primary">
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     </section>

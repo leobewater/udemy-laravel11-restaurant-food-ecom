@@ -8,6 +8,8 @@
     <title>FoodPark || Restaurant Template</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    @vite([])
+
 
     <link rel="icon" type="image/png" href="{{ asset('frontend/images/favicon.png') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/all.min.css') }}">

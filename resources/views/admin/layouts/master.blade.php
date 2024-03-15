@@ -7,6 +7,7 @@
     <title>General Dashboard &mdash; Stisla</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    @vite([])
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ asset('admin/assets/modules/bootstrap/css/bootstrap.min.css') }}">
