@@ -10,14 +10,13 @@
                 <h4>Create Item</h4>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.why-choose-us.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.why-choose-us.store') }}" method="POST">
                     @csrf
                     @method('POST')
                     <div class="form-group">
                         <label>icon</label>
-                        <button class="btn btn-primary" data-iconset="fontawesome5" data-icon="fas fa-wifi" role="iconpicker"></button>
-
-                        <input type="text" name="icon" class="form-control" value="{{ old('icon') }}" />
+                        <br>
+                        <button class="btn btn-primary btn-lg" data-iconset="fontawesome5" data-icon="fas fa-wifi" data-cols="6" data-rows="6" data-unselected-class="btn-default" role="iconpicker" name="icon"></button>
                     </div>
                     <div class="form-group">
                         <label>Title</label>

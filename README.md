@@ -24,4 +24,7 @@ Source Code: https://github.com/websolutionus/udemy_restaurant_foodpark/tree/mai
 
 > php artisan make:model WhyChooseUs
 > php artisan datatables:make WhyChooseUs
+
+## Icon Picker
+## https://victor-valencia.github.io/bootstrap-iconpicker/
 ```
