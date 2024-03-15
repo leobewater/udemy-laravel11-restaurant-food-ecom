@@ -133,7 +133,8 @@ class WhyChooseUsController extends Controller
         } catch (\Exception $e) {
             return response([
                 'status' => 'error',
-                'message' => $e->getMessage(),
+                // 'message' => $e->getMessage(),
+                'message' => 'Failed to delete item',
                 'alert-type' => 'error'
             ]);
         }
