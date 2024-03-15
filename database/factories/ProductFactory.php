@@ -20,7 +20,7 @@ class ProductFactory extends Factory
         return [
             'name' => fake()->word(),
             'slug' => fake()->slug(),
-            'thumb_image' => '/uploads/test.jpg',
+            'thumb_image' => 'https://placehold.co/640x480/png',
             'category_id' => function(){
                 return Category::inRandomOrder()->first()->id;
             },
