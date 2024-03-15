@@ -1,0 +1,84 @@
+@extends('admin.layouts.master')
+@section('content')
+    <section class="section">
+        <div class="section-header">
+            <h1>Add Product</h1>
+        </div>
+
+        <div class="card card-primary">
+            <div class="card-header">
+                <h4>Create Product</h4>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('POST')
+                    {{--
+            'category_id' => function(){
+                return Category::inRandomOrder()->first()->id;
+            },
+            'seo_title' => fake()->sentence(),
+            'seo_description' => fake()->paragraph(),
+            'show_at_home' => fake()->boolean(),
+            'status' => fake()->boolean(), --}}
+                    <div class="form-group">
+                        <label>Product Thumbnail</label>
+                        <div id="image-preview" class="image-preview">
+                            <label for="image-upload" id="image-label">Choose File</label>
+                            <input type="file" name="image" id="image-upload" value="{{ old('image') }}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" name="name" class="form-control" value="{{ old('name') }}" />
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select name="category" class="form-control select2">
+                            <option>Select</option>
+                            @foreach ($categories as $category)
+                                <option @selected(old('category') === $category->id) value="{{ $category->id }}">{{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Short Description</label>
+                        <textarea name="short_description" class="form-control">{{ old('short_description') }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Long Description</label>
+                        <textarea name="long_description" class="form-control">{{ old('long_description') }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Price</label>
+                        <input type="number" name="price" class="form-control" value="{{ old('price') }}" />
+                    </div>
+                    <div class="form-group">
+                        <label>Offer Price</label>
+                        <input type="number" name="offer_price" class="form-control" value="{{ old('offer_price') }}" />
+                    </div>
+                    <div class="form-group">
+                        <label>Sku</label>
+                        <input type="text" name="sku" class="form-control" value="{{ old('sku') }}" />
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select name="status" class="form-control">
+                            <option @selected(old('status') === 1) value="1">Active</option>
+                            <option @selected(old('status') !== 1) value="0">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Show At Home</label>
+                        <select name="show_at_home" class="form-control">
+                            <option @selected(old('show_at_home') === 1) value="1">Active</option>
+                            <option @selected(old('show_at_home') !== 1) value="0">Inactive</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </form>
+            </div>
+        </div>
+    </section>
+@endsection
