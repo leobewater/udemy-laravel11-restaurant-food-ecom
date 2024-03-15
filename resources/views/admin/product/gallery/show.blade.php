@@ -5,6 +5,10 @@
             <h1>"{{ $product->name }}" Product Gallery</h1>
         </div>
 
+        <div>
+            <a href="{{ route('admin.product.index') }}" class="btn btn-secondary mb-4">Go Back</a>
+        </div>
+
         <div class="card card-primary">
             <div class="card-header">
                 <h4>Upload Images</h4>
