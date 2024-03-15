@@ -4,7 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\CategoryDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\CategoryCreateRequest;
+use App\Http\Requests\Admin\CategoryUpdateRequest;
+use App\Models\Category;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Str;
 
 class CategoryController extends Controller
 {
@@ -19,17 +25,29 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('admin.product.category.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryCreateRequest $request): RedirectResponse
     {
-        //
+        // dd($request->all());
+        $validatedData = $request->validated();
+
+        Category::create([
+            ...$validatedData,
+            'slug' => Str::slug($validatedData['name']),
+        ]);
+
+        return redirect(route('admin.category.index'))->with([
+            'status' => 'created',
+            'message' => "Category created successfully",
+            'alert-type' => 'success'
+        ]);
     }
 
     /**
@@ -43,24 +61,51 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Category $category): View
     {
-        //
+        return view('admin.product.category.edit', ['category' => $category]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CategoryUpdateRequest $request, Category $category)
     {
-        //
+        // dd($request->all());
+        $validatedData = $request->validated();
+
+        $category->update([
+            ...$validatedData,
+            'slug' => Str::slug($validatedData['name']),
+        ]);
+
+        return redirect(route('admin.category.index'))->with([
+            'status' => 'updated',
+            'message' => "Category updated successfully",
+            'alert-type' => 'success'
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        //
+        try {
+            $category->delete();
+
+            return response([
+                'status' => 'success',
+                'message' => 'Category deleted successfully',
+                'alert-type' => 'success'
+            ]);
+        } catch (\Exception $e) {
+            return response([
+                'status' => 'error',
+                // 'message' => $e->getMessage(),
+                'message' => 'Failed to delete item',
+                'alert-type' => 'error'
+            ]);
+        }
     }
 }

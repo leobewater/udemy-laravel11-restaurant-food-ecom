@@ -36,7 +36,7 @@
                             <option @selected($whyChooseUs->status === 0) value="0">Inactive</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary" @disabled($errors->isNotEmpty())>Create</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>
         </div>

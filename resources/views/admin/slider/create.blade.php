@@ -7,7 +7,7 @@
 
         <div class="card card-primary">
             <div class="card-header">
-                <h4>Card Header</h4>
+                <h4>Create Slider</h4>
             </div>
             <div class="card-body">
                 <form action="{{ route('admin.slider.store') }}" method="POST" enctype="multipart/form-data">
@@ -47,7 +47,7 @@
                             <option @selected(old('status') !== 1) value="0">Inactive</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary" @disabled($errors->isNotEmpty())>Create</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
                 </form>
             </div>
         </div>

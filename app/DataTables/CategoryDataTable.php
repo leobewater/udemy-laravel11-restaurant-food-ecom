@@ -27,11 +27,18 @@ class CategoryDataTable extends DataTable
             $delete = "<a href='" . route('admin.category.destroy', $query->id) . "' class='btn delete-item'><i class='far fa-trash-alt'></i></a>";
             return $edit . $delete;
         })
-        ->addColumn('updated_at', function ($query) {
-            return $query->updated_at->diffForHumans();
+        ->addColumn('status', function ($query) {
+            return $query->status == 1
+                ? '<span class="badge badge-primary">Active</span>'
+                : '<span class="badge badge-light">Inactive</span>';
+        })
+        ->addColumn('show_at_home', function ($query) {
+            return $query->show_at_home == 1
+                ? '<span class="badge badge-primary">Active</span>'
+                : '<span class="badge badge-light">Inactive</span>';
         })
         ->rawColumns([
-            'action'
+            'status', 'show_at_home', 'action'
         ])
         ->setRowId('id');
     }
@@ -73,8 +80,12 @@ class CategoryDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('name'),
+            Column::make('slug'),
+            Column::make('status'),
+            Column::make('show_at_home'),
+            // Column::make('created_at'),
+            // Column::make('updated_at'),
             Column::computed('action')
             ->exportable(false)
             ->printable(false)
