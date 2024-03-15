@@ -1,7 +1,5 @@
 <?php
 
-use Str;
-
 if(!function_exists('generateUniqueSlug')) {
     function generateUniqueSlug($model, $name): string
     {
@@ -11,11 +9,11 @@ if(!function_exists('generateUniqueSlug')) {
             throw new \InvalidArgumentException("Model $model not found");
         }
 
-        $slug = Str::slug($name);
+        $slug = \Str::slug($name);
         $count = 2;
 
         while ($modelClass::where("slug", $slug)->exists()) {
-            $slug = Str::slug($name) . '-' . $count;
+            $slug = \Str::slug($name) . '-' . $count;
             $count++;
         }
 
