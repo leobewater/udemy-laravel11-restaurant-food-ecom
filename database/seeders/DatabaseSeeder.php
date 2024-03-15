@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\SectionTitle;
 use App\Models\Slider;
 use App\Models\User;
@@ -30,6 +31,10 @@ class DatabaseSeeder extends Seeder
 
         if (WhyChooseUs::count() === 0) {
             WhyChooseUs::factory(3)->create();
+        }
+
+        if (Category::count() === 0) {
+            $this->call(CategorySeeder::class);
         }
     }
 }
