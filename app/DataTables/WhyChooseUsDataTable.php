@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\WhyChooseU;
+use App\Models\WhyChooseUs;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -21,15 +21,23 @@ class WhyChooseUsDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-        return (new EloquentDataTable($query))
-            ->addColumn('action', 'whychooseus.action')
+        return(new EloquentDataTable($query))
+            ->addColumn('action', function ($query) {
+                $edit = "<a href='" . route('admin.why-choose-us.edit', $query->id) . "' class='btn'><i class='fas fa-edit'></i></a>";
+                $delete = "<a href='" . route('admin.why-choose-us.destroy', $query->id) . "' class='btn delete-item'><i class='far fa-trash-alt'></i></a>";
+                return $edit . $delete;
+            })
+            ->addColumn('icon', function ($query) {
+                return "<i style='font-size:25px;' class='" . $query->icon . "'></i>";
+            })
+            ->rawColumns(['icon', 'action'])
             ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(WhyChooseU $model): QueryBuilder
+    public function query(WhyChooseUs $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -62,15 +70,16 @@ class WhyChooseUsDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
             Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('icon'),
+            Column::make('title'),
+            // Column::make('created_at'),
+            // Column::make('updated_at'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(120)
+                ->addClass('text-center'),
         ];
     }
 

@@ -16,7 +16,7 @@ class WhyChooseUsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(WhyChooseUsDataTable $dataTable): View
+    public function index(WhyChooseUsDataTable $dataTable)
     {
         $keys = ['why_choose_top_title', 'why_choose_main_title', 'why_choose_sub_title'];
         $titles = SectionTitle::whereIn('key', $keys)->pluck('value', 'key');
