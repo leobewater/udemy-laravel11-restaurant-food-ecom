@@ -137,8 +137,7 @@
                                 if (response.status === 'success') {
                                     toastr.success(response.message);
 
-                                    // refresh datatable
-                                    $('#slider-table').DataTable().draw();
+                                    window.location.reload();
                                 } else {
                                     toastr.error(response?.message);
                                 }
