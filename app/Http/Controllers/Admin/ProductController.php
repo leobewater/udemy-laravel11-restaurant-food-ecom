@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\ProductDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProductCreateRequest;
+use App\Http\Requests\Admin\ProductUpdateRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Traits\FileUploadTrait;
@@ -87,17 +88,40 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+        return view('admin.product.edit', [
+            'categories' => Category::all(),
+            'product' => $product
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductUpdateRequest $request, Product $product)
     {
-        //
+        $validatedData = $request->validated();
+
+        if(!empty($validatedData['image']) && $validatedData['name'] !== $product->thumb_image) {
+            $validatedData['thumb_image'] = $this->uploadImage($request, 'image', $product->image);
+        }
+
+        if(!empty($validatedData['name']) && $validatedData['name'] !== $product->name) {
+            $validatedData['slug'] = generateUniqueSlug('Product', $validatedData['name']);
+        }
+
+        $product->update([
+            ...$validatedData,
+            'category_id' => $validatedData['category'],
+            'offer_price' => $validatedData['offer_price'] ?? 0,
+        ]);
+
+        return redirect(route('admin.product.index'))->with([
+            'status' => 'updated',
+            'message' => "Product updated successfully",
+            'alert-type' => 'success'
+        ]);
     }
 
     /**
