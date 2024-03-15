@@ -27,6 +27,17 @@ class SliderDataTable extends DataTable
                 $delete = "<a href='" . route('admin.slider.destroy', $query->id) . "' class='btn delete-item'><i class='far fa-trash-alt'></i></a>";
                 return $edit . $delete;
             })
+            ->addColumn('image', function ($query) {
+                return "<img width='100px' src='" . asset($query->image) . "' />";
+            })
+            ->addColumn('status', function ($query) {
+                return $query->status == 1
+                ? '<span class="badge badge-primary">Active</span>'
+                : '<span class="badge badge-light">Inactive</span>';
+            })
+            ->rawColumns([
+                'image', 'action', 'status'
+            ])
             ->setRowId('id');
     }
 
@@ -66,9 +77,10 @@ class SliderDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id'),
-            Column::make('image'),
+            Column::make('id')->width(60),
+            Column::make('image')->width(150),
             Column::make('title'),
+            Column::make('status'),
             // Column::make('created_at'),
             // Column::make('updated_at'),
             Column::computed('action')
