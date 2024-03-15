@@ -11,7 +11,7 @@ class FrontendController extends Controller
 {
     public function index():View
 	{
-        $sliders = Slider::where('status', 1)->latest()->get();
+        $sliders = Slider::where('status', 1)->get();
 
 		return view('frontend.home.index', [
             'sliders' => $sliders

@@ -93,6 +93,7 @@ class SliderController extends Controller
     {
         try {
             $slider->delete();
+            $this->removeImage($slider->image);
 
             return response([
                 'status' => 'success',

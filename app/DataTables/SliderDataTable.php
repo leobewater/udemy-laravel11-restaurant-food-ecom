@@ -32,12 +32,16 @@ class SliderDataTable extends DataTable
             })
             ->addColumn('status', function ($query) {
                 return $query->status == 1
-                ? '<span class="badge badge-primary">Active</span>'
-                : '<span class="badge badge-light">Inactive</span>';
+                    ? '<span class="badge badge-primary">Active</span>'
+                    : '<span class="badge badge-light">Inactive</span>';
+            })
+            ->addColumn('updated_at', function ($query) {
+                return $query->updated_at->diffForHumans();
             })
             ->rawColumns([
                 'image', 'action', 'status'
             ])
+            // ->orderColumns(['updated_at'], '-:column $1')
             ->setRowId('id');
     }
 
@@ -82,7 +86,7 @@ class SliderDataTable extends DataTable
             Column::make('title'),
             Column::make('status'),
             // Column::make('created_at'),
-            // Column::make('updated_at'),
+            Column::make('updated_at'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
