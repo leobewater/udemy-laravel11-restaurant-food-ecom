@@ -60,7 +60,6 @@
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{{ route('admin.category.index') }}">Product Categories</a></li>
                     <li><a class="nav-link" href="{{ route('admin.product.index') }}">Products</a></li>
-                    <li><a class="nav-link" href="{{ route('admin.product-gallery.index') }}">Product Galleries</a></li>
                 </ul>
                 </ul>
             </li>

@@ -34,8 +34,9 @@ Route::group(
             Route::resource('/why-choose-us', WhyChooseUsController::class);
             Route::resource('/category', CategoryController::class);
             Route::resource('/product', ProductController::class);
-            Route::get('/product-gallery/{product}', [ProductGalleryController::class, 'index'])->name('product-gallery.show-index');
-            Route::resource('/product-gallery', ProductGalleryController::class);
+            Route::get('/product-gallery/{product}', [ProductGalleryController::class, 'show'])->name('product-gallery.show');
+            Route::resource('/product-gallery', ProductGalleryController::class)
+            ->only(['store','destroy']);
         });
     }
 );

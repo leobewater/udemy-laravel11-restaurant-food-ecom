@@ -3,18 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\ProductGallery;
+use App\Traits\FileUploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ProductGalleryController extends Controller
 {
+    use FileUploadTrait;
+
     /**
      * Display a listing of the resource.
      */
     public function index(): View
     {
-        return view('admin.product.gallery.index');
     }
 
     /**
@@ -30,13 +33,15 @@ class ProductGalleryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'image' => ['required', 'image', 'max:3072'],
+            'product_id' => ['required', 'integer']
         ]);
+        $validatedData['image'] = $this->uploadImage($request, 'image');
 
-        ProductGallery::create();
+        ProductGallery::create($validatedData);
 
-        return redirect(route('admin.product-gallery.index'))->with([
+        return back()->with([
             'status' => 'created',
             'message' => "Image uploaded successfully",
             'alert-type' => 'success'
@@ -46,9 +51,11 @@ class ProductGalleryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Product $product)
     {
-        //
+        return view('admin.product.gallery.show', [
+            'product'=> $product
+        ]);
     }
 
     /**
