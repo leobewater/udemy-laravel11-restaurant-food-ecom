@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('section_titles', function (Blueprint $table) {
             $table->id();
+
+            $table->text('key')->nullable();
+            $table->text('value')->nullable();
+
             $table->timestamps();
         });
     }
