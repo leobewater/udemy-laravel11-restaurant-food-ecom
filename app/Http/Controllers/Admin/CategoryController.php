@@ -7,8 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CategoryCreateRequest;
 use App\Http\Requests\Admin\CategoryUpdateRequest;
 use App\Models\Category;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 use Str;
 
@@ -17,7 +19,7 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(CategoryDataTable $dataTable)
+    public function index(CategoryDataTable $dataTable): View|JsonResponse
     {
         return $dataTable->render('admin.product.category.index');
     }
@@ -67,7 +69,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoryUpdateRequest $request, Category $category)
+    public function update(CategoryUpdateRequest $request, Category $category): RedirectResponse
     {
         // dd($request->all());
         $validatedData = $request->validated();
@@ -87,7 +89,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category): Response
     {
         try {
             $category->delete();

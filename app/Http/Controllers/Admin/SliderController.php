@@ -8,7 +8,10 @@ use App\Http\Requests\Admin\SliderCreateRequest;
 use App\Http\Requests\Admin\SliderUpdateRequest;
 use App\Models\Slider;
 use App\Traits\FileUploadTrait;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class SliderController extends Controller
@@ -18,7 +21,7 @@ class SliderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(SliderDataTable $dataTable)
+    public function index(SliderDataTable $dataTable): View|JsonResponse
     {
         return $dataTable->render('admin.slider.index');
     }
@@ -34,7 +37,7 @@ class SliderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(SliderCreateRequest $request)
+    public function store(SliderCreateRequest $request): RedirectResponse
     {
         $validatedData = $request->validated();
         $validatedData['image'] = $this->uploadImage($request, 'image');
@@ -67,7 +70,7 @@ class SliderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(SliderUpdateRequest $request, Slider $slider)
+    public function update(SliderUpdateRequest $request, Slider $slider): RedirectResponse
     {
         $validatedData = $request->validated();
 
@@ -87,7 +90,7 @@ class SliderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Slider $slider)
+    public function destroy(Slider $slider): Response
     {
         try {
             $this->removeImage($slider->image);
