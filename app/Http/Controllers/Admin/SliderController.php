@@ -36,12 +36,10 @@ class SliderController extends Controller
      */
     public function store(SliderCreateRequest $request)
     {
-        $imagePath = $this->uploadImage($request, 'image');
-        $slider = new Slider([
-            ...$request->validated(),
-            'image' => $imagePath
-        ]);
-        $slider->save();
+        $validatedData = $request->validated();
+        $validatedData['image'] = $this->uploadImage($request, 'image');
+
+        Slider::create($validatedData);
 
         return redirect(route('admin.slider.index'))->with([
             'status' => 'slider-created',
@@ -73,7 +71,7 @@ class SliderController extends Controller
     {
         $validatedData = $request->validated();
 
-        if(!empty($validatedData['image'])) {
+        if(!empty($validatedData['image']) && $validatedData['image'] !== $slider->image) {
             $validatedData['image'] = $this->uploadImage($request, 'image', $slider->image);
         }
 

@@ -37,11 +37,9 @@ class CategoryController extends Controller
     {
         // dd($request->all());
         $validatedData = $request->validated();
+        $validatedData['slug'] = Str::slug($validatedData['name']);
 
-        Category::create([
-            ...$validatedData,
-            'slug' => Str::slug($validatedData['name']),
-        ]);
+        Category::create($validatedData);
 
         return redirect(route('admin.category.index'))->with([
             'status' => 'created',
@@ -73,11 +71,11 @@ class CategoryController extends Controller
     {
         // dd($request->all());
         $validatedData = $request->validated();
+        if(!empty($validatedData['name']) && $validatedData['name'] !== $category->name) {
+            $validatedData['slug'] = Str::slug($validatedData['name']);
+        }
 
-        $category->update([
-            ...$validatedData,
-            'slug' => Str::slug($validatedData['name']),
-        ]);
+        $category->update($validatedData);
 
         return redirect(route('admin.category.index'))->with([
             'status' => 'updated',
