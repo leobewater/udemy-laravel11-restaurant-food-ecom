@@ -2,12 +2,12 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Product Gallery</h1>
+            <h1>"{{ $product->name }}" Product Gallery</h1>
         </div>
 
         <div class="card card-primary">
             <div class="card-header">
-                <h4>All Images for "{{ $product->name }}"</h4>
+                <h4>Upload Images</h4>
             </div>
             <div class="card-body">
                 <div class="col-md-8">
@@ -34,6 +34,19 @@
                             <th>Action</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        @foreach ($images as $image)
+                            <tr>
+                                <td>
+                                    <img width="80" src="{{ asset($image->image) }}" />
+                                </td>
+                                <td>
+                                    <a href="{{ route('admin.product-gallery.destroy', $image->id) }}"
+                                        class='btn delete-item'><i class='far fa-trash-alt'></i></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>

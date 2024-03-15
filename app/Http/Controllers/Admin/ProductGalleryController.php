@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\ProductGallery;
 use App\Traits\FileUploadTrait;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class ProductGalleryController extends Controller
@@ -54,7 +55,8 @@ class ProductGalleryController extends Controller
     public function show(Product $product)
     {
         return view('admin.product.gallery.show', [
-            'product'=> $product
+            'product' => $product,
+            'images' => ProductGallery::where('product_id', $product->id)->get()
         ]);
     }
 
@@ -77,8 +79,26 @@ class ProductGalleryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): Response
     {
-        //
+        try {
+            $gallery = ProductGallery::findOrFail($id);
+            $this->removeImage($gallery->image);
+            $gallery->delete();
+
+            return response([
+                'status' => 'success',
+                'message' => 'Image deleted successfully',
+                'alert-type' => 'success'
+            ]);
+        } catch (\Exception $e) {
+            return response([
+                'status' => 'error',
+                'message' => 'Failed to delete item',
+                'alert-type' => 'error'
+            ]);
+        }
+
+
     }
 }
