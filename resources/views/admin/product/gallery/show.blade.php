@@ -39,7 +39,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($images as $image)
+                        @forelse ($images as $image)
                             <tr>
                                 <td>
                                     <img width="80" src="{{ asset($image->image) }}" />
@@ -49,7 +49,11 @@
                                         class='btn delete-item'><i class='far fa-trash-alt'></i></a>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="2" class="text-center">No images found!</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
