@@ -15,6 +15,8 @@
                     @method('POST')
                     <div class="form-group">
                         <label>icon</label>
+                        <button class="btn btn-primary" data-iconset="fontawesome5" data-icon="fas fa-wifi" role="iconpicker"></button>
+
                         <input type="text" name="icon" class="form-control" value="{{ old('icon') }}" />
                     </div>
                     <div class="form-group">
