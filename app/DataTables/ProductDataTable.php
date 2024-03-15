@@ -21,26 +21,50 @@ class ProductDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-        return (new EloquentDataTable($query))
-        ->addColumn('action', function ($query) {
-            $edit = "<a href='" . route('admin.product.edit', $query->id) . "' class='btn'><i class='fas fa-edit'></i></a>";
-            $delete = "<a href='" . route('admin.product.destroy', $query->id) . "' class='btn delete-item'><i class='far fa-trash-alt'></i></a>";
-            return $edit . $delete;
-        })
-        ->addColumn('status', function ($query) {
-            return $query->status == 1
-                ? '<span class="badge badge-primary">Active</span>'
-                : '<span class="badge badge-light">Inactive</span>';
-        })
-        ->addColumn('show_at_home', function ($query) {
-            return $query->show_at_home == 1
-                ? '<span class="badge badge-primary">Active</span>'
-                : '<span class="badge badge-light">Inactive</span>';
-        })
-        ->rawColumns([
-            'status', 'show_at_home', 'action'
-        ])
-        ->setRowId('id');
+        return(new EloquentDataTable($query))
+            ->addColumn('action', function ($query) {
+                $edit = "<a href='" . route('admin.product.edit', $query->id) . "' class='btn'><i class='fas fa-edit'></i></a>";
+                $delete = "<a href='" . route('admin.product.destroy', $query->id) . "' class='btn delete-item'><i class='far fa-trash-alt'></i></a>";
+                $more = '<div class="btn-group dropleft">
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-cog"></i>
+                    </button>
+                    <div class="dropdown-menu dropleft" x-placement="left-start" style="position: absolute; transform: translate3d(-202px, 0px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Separated link</a>
+                    </div>
+                </div>';
+                return $edit . $delete . $more;
+            })
+            ->addColumn('name', function ($query) {
+                return '<strong>' . $query->name . '</strong><br>slug: ' . $query->slug;
+            })
+            ->addColumn('price', function ($query) {
+                return '$' . $query->price;
+            })
+            ->addColumn('offer_price', function ($query) {
+                return '$' . $query->offer_price;
+            })
+            ->addColumn('thumb_image', function ($query) {
+                return "<img width='80px' src='" . asset($query->thumb_image) . "' />";
+            })
+            ->addColumn('status', function ($query) {
+                return $query->status == 1
+                    ? '<span class="badge badge-primary">Active</span>'
+                    : '<span class="badge badge-light">Inactive</span>';
+            })
+            ->addColumn('show_at_home', function ($query) {
+                return $query->show_at_home == 1
+                    ? '<span class="badge badge-primary">Active</span>'
+                    : '<span class="badge badge-light">Inactive</span>';
+            })
+            ->rawColumns([
+            'name', 'price', 'thumb_image', 'status', 'show_at_home', 'action'
+            ])
+            ->setRowId('id');
     }
 
     /**
@@ -91,7 +115,7 @@ class ProductDataTable extends DataTable
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->width(120)
+                ->width(160)
                 ->addClass('text-center'),
         ];
     }
